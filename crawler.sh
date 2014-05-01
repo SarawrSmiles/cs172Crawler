@@ -1,10 +1,14 @@
 #!/bin/bash
 
-#virtualenv venv
+if [ "$1" = "setup" ]; then
+  virtualenv venv
+  . venv/bin/activate
+  echo "SETTING UP"
+  git clone git://github.com/joshthecoder/tweepy.git
+  cd tweepy
+  python setup.py install
 
-. venv/bin/activate
-
-#pip install flask
-#pip install tweepy
-
-python crawler.py $1 $2
+  python crawler.py $2 $3
+else 
+  python crawler.py $1 $2
+fi
